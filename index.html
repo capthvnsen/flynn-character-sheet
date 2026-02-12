@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flynn — Fire Genasi Hexblade/Swashbuckler</title>
+    <style>
+        :root {
+            --fire-orange: #ff6b35;
+            --fire-red: #d62828;
+            --ember: #f77f00;
+            --dark: #1a1a2e;
+            --darker: #16213e;
+            --card: #1f1f3a;
+            --text: #eee;
+            --muted: #aaa;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--darker) 100%);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 1rem;
+            padding-bottom: 2rem;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            background: linear-gradient(135deg, var(--fire-red) 0%, var(--fire-orange) 50%, var(--ember) 100%);
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .header .tagline {
+            font-style: italic;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--card);
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--fire-orange);
+        }
+        
+        .card h2 {
+            font-size: 1rem;
+            color: var(--fire-orange);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .stat-box {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.75rem 0.5rem;
+            text-align: center;
+        }
+        
+        .stat-box .label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .stat-box .value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--fire-orange);
+        }
+        
+        .stat-box .mod {
+            font-size: 0.85rem;
+            color: var(--text);
+        }
+        
+        /* Combat Stats Row */
+        .combat-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .combat-stat {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            text-align: center;
+        }
+        
+        .combat-stat .label {
+            font-size: 0.65rem;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+        
+        .combat-stat .value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--ember);
+        }
+        
+        /* Attack blocks */
+        .attack {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .attack-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+        }
+        
+        .attack-name {
+            font-weight: bold;
+            color: var(--fire-orange);
+        }
+        
+        .attack-hit {
+            font-size: 0.85rem;
+            color: var(--ember);
+        }
+        
+        .attack-damage {
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+        
+        /* Feature list */
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-name {
+            color: var(--fire-orange);
+            font-weight: 600;
+        }
+        
+        /* Skills */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.25rem 1rem;
+        }
+        
+        .skill {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.35rem 0;
+            font-size: 0.85rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .skill.expert {
+            color: var(--fire-orange);
+            font-weight: 600;
+        }
+        
+        .skill-mod {
+            font-weight: bold;
+        }
+        
+        /* Spells */
+        .spell {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.35rem;
+            font-size: 0.85rem;
+        }
+        
+        .spell-name {
+            color: var(--ember);
+            font-weight: 600;
+        }
+        
+        .spell-level {
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        
+        /* Invocations */
+        .invocation {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.35rem;
+        }
+        
+        .invocation-name {
+            color: var(--fire-orange);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .invocation-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        
+        /* Resources */
+        .resource-row {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .resource {
+            background: var(--darker);
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            flex: 1;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .resource-name {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+        
+        .resource-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--fire-orange);
+        }
+        
+        .resource-recharge {
+            font-size: 0.65rem;
+            color: var(--muted);
+        }
+        
+        /* Equipment */
+        .equipment-item {
+            padding: 0.4rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.85rem;
+        }
+        
+        .equipment-item:last-child {
+            border-bottom: none;
+        }
+        
+        .magic-item {
+            color: var(--ember);
+            font-weight: 600;
+        }
+        
+        /* Nova section */
+        .nova-box {
+            background: linear-gradient(135deg, rgba(214,40,40,0.2) 0%, rgba(255,107,53,0.2) 100%);
+            border: 1px solid var(--fire-orange);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        
+        .nova-title {
+            color: var(--fire-orange);
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .nova-damage {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--ember);
+        }
+        
+        .nova-note {
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+        
+        /* Collapsible sections */
+        details {
+            background: var(--card);
+            border-radius: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-left: 3px solid var(--fire-orange);
+        }
+        
+        details summary {
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--fire-orange);
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        details summary::after {
+            content: '▸';
+            transition: transform 0.2s;
+        }
+        
+        details[open] summary::after {
+            transform: rotate(90deg);
+        }
+        
+        details .content {
+            padding: 0 1rem 1rem 1rem;
+        }
+        
+        /* Resistances */
+        .resistance-tag {
+            display: inline-block;
+            background: var(--fire-red);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            color: var(--muted);
+            font-size: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🔥 Flynn</h1>
+            <div class="subtitle">Fire Genasi • Hexblade 5 / Swashbuckler 10</div>
+            <div class="tagline">"You have a vulnerability. Ask me how I know."</div>
+        </div>
+        
+        <!-- Combat Stats -->
+        <div class="card">
+            <h2>⚔️ Combat</h2>
+            <div class="combat-row">
+                <div class="combat-stat">
+                    <div class="label">AC</div>
+                    <div class="value">17</div>
+                </div>
+                <div class="combat-stat">
+                    <div class="label">HP</div>
+                    <div class="value">131</div>
+                </div>
+                <div class="combat-stat">
+                    <div class="label">Init</div>
+                    <div class="value">+9</div>
+                </div>
+                <div class="combat-stat">
+                    <div class="label">Prof</div>
+                    <div class="value">+5</div>
+                </div>
+            </div>
+            <div style="margin-top: 0.5rem;">
+                <span class="resistance-tag">🔥 Fire Resistance</span>
+            </div>
+        </div>
+        
+        <!-- Ability Scores -->
+        <div class="card">
+            <h2>📊 Abilities</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="label">STR</div>
+                    <div class="value">13</div>
+                    <div class="mod">+1</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">DEX</div>
+                    <div class="value">18</div>
+                    <div class="mod">+4 ✓</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">CON</div>
+                    <div class="value">18</div>
+                    <div class="mod">+4</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">INT</div>
+                    <div class="value">13</div>
+                    <div class="mod">+1 ✓</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">WIS</div>
+                    <div class="value">14</div>
+                    <div class="mod">+2</div>
+                </div>
+                <div class="stat-box">
+                    <div class="label">CHA</div>
+                    <div class="value">20</div>
+                    <div class="mod">+5</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resources -->
+        <div class="card">
+            <h2>⚡ Resources</h2>
+            <div class="resource-row">
+                <div class="resource">
+                    <div class="resource-name">Spell Slots</div>
+                    <div class="resource-value">◉ ◉</div>
+                    <div class="resource-recharge">3rd level • Short Rest</div>
+                </div>
+                <div class="resource">
+                    <div class="resource-name">Hexblade's Curse</div>
+                    <div class="resource-value">◉</div>
+                    <div class="resource-recharge">Short Rest</div>
+                </div>
+            </div>
+            <div class="resource-row" style="margin-top: 0.5rem;">
+                <div class="resource">
+                    <div class="resource-name">Ring of Spell Storing</div>
+                    <div class="resource-value">5 levels</div>
+                    <div class="resource-recharge">Counterspell + Shield + Absorb Elements</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Attacks -->
+        <div class="card">
+            <h2>🗡️ Attacks</h2>
+            <div class="attack">
+                <div class="attack-header">
+                    <span class="attack-name">Rapier (Pact Weapon)</span>
+                    <span class="attack-hit">+10 to hit</span>
+                </div>
+                <div class="attack-damage">1d8+5 piercing + 5d6 sneak attack</div>
+            </div>
+            <div class="attack">
+                <div class="attack-header">
+                    <span class="attack-name">Booming Blade</span>
+                    <span class="attack-hit">+10 to hit</span>
+                </div>
+                <div class="attack-damage">1d8+5 + 2d8 thunder (+ 3d8 if they move)</div>
+            </div>
+            <div class="attack">
+                <div class="attack-header">
+                    <span class="attack-name">Eldritch Blast</span>
+                    <span class="attack-hit">+10 to hit</span>
+                </div>
+                <div class="attack-damage">3 beams × 1d10 force (120 ft)</div>
+            </div>
+            <div class="attack">
+                <div class="attack-header">
+                    <span class="attack-name">Eldritch Smite</span>
+                    <span class="attack-hit">On hit, 1 slot</span>
+                </div>
+                <div class="attack-damage">+4d8 force, target knocked prone</div>
+            </div>
+            
+            <div class="nova-box" style="margin-top: 0.75rem;">
+                <div class="nova-title">💥 NOVA (Crit + Curse + Smite)</div>
+                <div class="nova-damage">~90 damage</div>
+                <div class="nova-note">2d8 + 4d8 + 10d6 + 8d8 + 10 • Target prone</div>
+            </div>
+        </div>
+        
+        <!-- Skills -->
+        <div class="card">
+            <h2>🎯 Skills</h2>
+            <div class="skill-grid">
+                <div class="skill expert"><span>Stealth</span><span class="skill-mod">+14</span></div>
+                <div class="skill expert"><span>Persuasion</span><span class="skill-mod">+15</span></div>
+                <div class="skill expert"><span>Deception</span><span class="skill-mod">+15</span></div>
+                <div class="skill expert"><span>Thieves' Tools</span><span class="skill-mod">+14</span></div>
+                <div class="skill"><span>Perception</span><span class="skill-mod">+7</span></div>
+                <div class="skill"><span>Insight</span><span class="skill-mod">+7</span></div>
+                <div class="skill"><span>Performance</span><span class="skill-mod">+10</span></div>
+                <div class="skill"><span>Acrobatics</span><span class="skill-mod">+9</span></div>
+            </div>
+        </div>
+        
+        <!-- Invocations -->
+        <div class="card">
+            <h2>👁️ Invocations</h2>
+            <div class="invocation">
+                <div class="invocation-name">Devil's Sight</div>
+                <div class="invocation-desc">See 120 ft in magical & normal darkness</div>
+            </div>
+            <div class="invocation">
+                <div class="invocation-name">Mask of Many Faces</div>
+                <div class="invocation-desc">Disguise Self at will, no slot</div>
+            </div>
+            <div class="invocation">
+                <div class="invocation-name">Thirsting Blade</div>
+                <div class="invocation-desc">Extra Attack with pact weapon</div>
+            </div>
+        </div>
+        
+        <!-- Spells -->
+        <details>
+            <summary>✨ Spells</summary>
+            <div class="content">
+                <p style="font-size: 0.8rem; color: var(--muted); margin-bottom: 0.5rem;">Cantrips</p>
+                <div class="spell">
+                    <span class="spell-name">Booming Blade</span> • 
+                    <span class="spell-name">Eldritch Blast</span> • 
+                    <span class="spell-name">Minor Illusion</span> • 
+                    <span class="spell-name">Produce Flame</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--muted); margin: 0.5rem 0;">Spells Known</p>
+                <div class="spell">
+                    <span class="spell-name">Armor of Agathys</span>
+                    <span class="spell-level"> — 15 THP + cold retaliation (3rd)</span>
+                </div>
+                <div class="spell">
+                    <span class="spell-name">Hex</span>
+                    <span class="spell-level"> — +1d6/hit, disadvantage on checks</span>
+                </div>
+                <div class="spell">
+                    <span class="spell-name">Darkness</span>
+                    <span class="spell-level"> — 15 ft sphere, you see through</span>
+                </div>
+                <div class="spell">
+                    <span class="spell-name">Misty Step</span>
+                    <span class="spell-level"> — Bonus action teleport 30 ft</span>
+                </div>
+                <div class="spell">
+                    <span class="spell-name">Counterspell</span>
+                    <span class="spell-level"> — Reaction, stop enemy spell</span>
+                </div>
+                <div class="spell">
+                    <span class="spell-name">Fly</span>
+                    <span class="spell-level"> — Concentration, 60 ft fly</span>
+                </div>
+            </div>
+        </details>
+        
+        <!-- Class Features -->
+        <details>
+            <summary>⚡ Class Features</summary>
+            <div class="content">
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin-bottom: 0.5rem;">Hexblade Warlock</p>
+                <ul class="feature-list">
+                    <li><span class="feature-name">Hexblade's Curse:</span> Bonus action, +5 dmg, crit 19-20, heal 10 on kill</li>
+                    <li><span class="feature-name">Hex Warrior:</span> CHA for attack & damage</li>
+                    <li><span class="feature-name">Pact of the Blade:</span> Summon any melee weapon</li>
+                </ul>
+                
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin: 0.75rem 0 0.5rem 0;">Swashbuckler Rogue</p>
+                <ul class="feature-list">
+                    <li><span class="feature-name">Sneak Attack:</span> 5d6 (1/turn)</li>
+                    <li><span class="feature-name">Fancy Footwork:</span> Free disengage from anyone you attack</li>
+                    <li><span class="feature-name">Rakish Audacity:</span> +CHA to init, Sneak Attack in 1v1</li>
+                    <li><span class="feature-name">Panache:</span> Persuasion vs Insight — taunt or charm</li>
+                    <li><span class="feature-name">Uncanny Dodge:</span> Reaction: halve one attack</li>
+                    <li><span class="feature-name">Evasion:</span> DEX saves: pass=0 dmg, fail=half</li>
+                    <li><span class="feature-name">Cunning Action:</span> Bonus: Dash/Disengage/Hide</li>
+                </ul>
+                
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin: 0.75rem 0 0.5rem 0;">Fire Genasi</p>
+                <ul class="feature-list">
+                    <li><span class="feature-name">Darkvision:</span> 60 ft</li>
+                    <li><span class="feature-name">Fire Resistance:</span> Half fire damage</li>
+                    <li><span class="feature-name">Burning Hands:</span> 1/long rest</li>
+                </ul>
+                
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin: 0.75rem 0 0.5rem 0;">War Caster (Feat)</p>
+                <ul class="feature-list">
+                    <li>Advantage on concentration saves</li>
+                    <li>Somatic components with full hands</li>
+                    <li>Booming Blade as opportunity attack</li>
+                </ul>
+            </div>
+        </details>
+        
+        <!-- Equipment -->
+        <details>
+            <summary>🎒 Equipment</summary>
+            <div class="content">
+                <div class="equipment-item"><span class="magic-item">Ring of Spell Storing</span> — 5 levels stored</div>
+                <div class="equipment-item"><span class="magic-item">Mithral Half-plate</span> — AC 17, no stealth penalty</div>
+                <div class="equipment-item">Rapier (Pact Weapon)</div>
+                <div class="equipment-item">3 Daggers (concealed)</div>
+                <div class="equipment-item">Thieves' Tools</div>
+                <div class="equipment-item">Disguise Kit</div>
+                <div class="equipment-item">Component Pouch</div>
+                <div class="equipment-item">Calligrapher's Supplies</div>
+                <div class="equipment-item">Leather Folio (contracts & invoices)</div>
+                <div class="equipment-item">50 ft Silk Rope + Grappling Hook</div>
+            </div>
+        </details>
+        
+        <!-- Quick Tactics -->
+        <details>
+            <summary>🎯 Combat Tactics</summary>
+            <div class="content">
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin-bottom: 0.5rem;">Standard Turn</p>
+                <ol style="font-size: 0.85rem; padding-left: 1.25rem; margin-bottom: 0.75rem;">
+                    <li>Bonus: Hexblade's Curse (big target)</li>
+                    <li>Action: Booming Blade attack</li>
+                    <li>Walk away (Fancy Footwork)</li>
+                    <li>Enemy: stay put or take thunder damage</li>
+                </ol>
+                
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin-bottom: 0.5rem;">Darkness Ambush</p>
+                <ol style="font-size: 0.85rem; padding-left: 1.25rem; margin-bottom: 0.75rem;">
+                    <li>Cast Darkness on self</li>
+                    <li>You see through (Devil's Sight)</li>
+                    <li>All attacks have advantage</li>
+                    <li>Fish for 19-20 crits → Smite</li>
+                </ol>
+                
+                <p style="font-size: 0.85rem; color: var(--fire-orange); font-weight: bold; margin-bottom: 0.5rem;">Emergency Exits</p>
+                <ul style="font-size: 0.85rem; padding-left: 1.25rem;">
+                    <li>Misty Step (bonus action)</li>
+                    <li>Uncanny Dodge (halve damage)</li>
+                    <li>Shield from Ring (+5 AC)</li>
+                    <li>Darkness + walk away</li>
+                </ul>
+            </div>
+        </details>
+        
+        <!-- Backstory -->
+        <details>
+            <summary>📜 Background</summary>
+            <div class="content">
+                <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                    <strong>Former Life:</strong> Court jester who learned that the fool sees everything, 
+                    hears everything, and is trusted with nothing — which means no one guards their secrets around you.
+                </p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.75rem;">
+                    <strong>Current Profession:</strong> "Security Consultant" — breaks into places to 
+                    expose vulnerabilities. For a fee.
+                </p>
+                <p style="font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem;">
+                    <strong>Services:</strong>
+                </p>
+                <ul style="font-size: 0.85rem; padding-left: 1.25rem; color: var(--muted);">
+                    <li>Perimeter assessment: 25 gp</li>
+                    <li>Ward bypass (basic): 50 gp</li>
+                    <li>Ward bypass (arcane): 150 gp</li>
+                    <li>Guard "reassignment": 75 gp/guard</li>
+                    <li>Discretion fee: Negotiable</li>
+                </ul>
+            </div>
+        </details>
+        
+        <div class="footer">
+            Flynn • Fire Genasi Hexblade 5 / Swashbuckler 10<br>
+            <em>"The consultation is free. The silence costs extra."</em>
+        </div>
+    </div>
+</body>
+</html>
