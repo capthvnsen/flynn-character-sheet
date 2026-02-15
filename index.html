@@ -346,6 +346,21 @@
             font-size: 0.8rem;
         }
         
+        .spell-slot-box.used {
+            background: #6366f1 !important;
+        }
+        
+        .spell-slot-box.used::after {
+            content: '✓';
+            color: white;
+        }
+        
+        .ring-slot.used {
+            background: #a78bfa !important;
+            color: white !important;
+            text-decoration: line-through;
+        }
+        
         /* Ability Scores */
         .abilities-grid {
             display: grid;
@@ -851,6 +866,33 @@
     
     <!-- Combat Tab -->
     <div class="tab-content active" id="combat">
+        <!-- Spell Slots Tracker -->
+        <div class="card" style="background: linear-gradient(135deg, var(--card) 0%, #1a1a3a 100%); border: 1px solid #6366f1;">
+            <div class="card-header">
+                <div class="card-title"><span class="icon">✨</span> Spell Slots</div>
+                <span style="font-size: 0.7rem; color: #a5b4fc;">Short Rest Recovery</span>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;">
+                <div style="text-align: center;">
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem;">WARLOCK SLOTS (3RD LEVEL)</div>
+                    <div style="display: flex; gap: 0.75rem; justify-content: center;">
+                        <div class="spell-slot-box" onclick="this.classList.toggle('used')" style="width: 3rem; height: 3rem; border: 3px solid #6366f1; border-radius: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.2s; background: var(--secondary);"></div>
+                        <div class="spell-slot-box" onclick="this.classList.toggle('used')" style="width: 3rem; height: 3rem; border: 3px solid #6366f1; border-radius: 0.5rem; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; transition: all 0.2s; background: var(--secondary);"></div>
+                    </div>
+                    <div style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.35rem;">Tap to mark used</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.5rem;">RING OF SPELL STORING</div>
+                    <div style="display: flex; gap: 0.5rem; justify-content: center;">
+                        <div class="ring-slot" onclick="this.classList.toggle('used')" style="width: 2rem; height: 2rem; border: 2px solid #a78bfa; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; background: var(--secondary); color: #a78bfa;">3</div>
+                        <div class="ring-slot" onclick="this.classList.toggle('used')" style="width: 2rem; height: 2rem; border: 2px solid #a78bfa; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; background: var(--secondary); color: #a78bfa;">1</div>
+                        <div class="ring-slot" onclick="this.classList.toggle('used')" style="width: 2rem; height: 2rem; border: 2px solid #a78bfa; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; background: var(--secondary); color: #a78bfa;">1</div>
+                    </div>
+                    <div style="font-size: 0.6rem; color: var(--text-muted); margin-top: 0.35rem;">Counterspell • Shield • Absorb Elements</div>
+                </div>
+            </div>
+        </div>
+        
         <!-- HP Tracker -->
         <div class="card hp-tracker">
             <div class="card-header">
