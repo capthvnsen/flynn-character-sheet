@@ -857,15 +857,232 @@
     
     <!-- Tabs -->
     <div class="tabs">
-        <button class="tab active" data-tab="combat">Combat</button>
+        <button class="tab active" data-tab="help">What Can I Do?</button>
+        <button class="tab" data-tab="combat">Combat</button>
         <button class="tab" data-tab="abilities">Abilities</button>
         <button class="tab" data-tab="spells">Spells</button>
         <button class="tab" data-tab="features">Features</button>
         <button class="tab" data-tab="equipment">Equipment</button>
     </div>
     
+    <!-- What Can I Do Tab -->
+    <div class="tab-content active" id="help">
+        <div class="card" style="border-left-color: #22c55e;">
+            <div class="card-title"><span class="icon">⚔️</span> It's My Turn in Combat!</div>
+            <div style="font-size: 0.85rem;">
+                <p style="color: var(--text-muted); margin-bottom: 0.75rem;">Every turn you get: <strong>1 Action</strong> + <strong>1 Bonus Action</strong> + <strong>Movement (30 ft)</strong> + <strong>1 Free Item Interaction</strong></p>
+                
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #22c55e; font-weight: 600; margin-bottom: 0.35rem;">ACTION (pick one)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        • <strong>Attack twice</strong> with rapier (+10, 1d8+5 each, add Sneak Attack 5d6 to first hit)<br>
+                        • <strong>Booming Blade</strong> — 1 attack + thunder damage + punishment if they move<br>
+                        • <strong>Cast a spell</strong> — Darkness, Fly, Counterspell, etc.<br>
+                        • <strong>Panache</strong> — Taunt enemy (they must attack you) or charm non-hostile<br>
+                        • <strong>Dash</strong> — Double your movement (60 ft total)<br>
+                        • <strong>Dodge</strong> — Attacks against you have disadvantage<br>
+                        • <strong>Hide</strong> — If behind cover, roll Stealth +14 to become hidden<br>
+                        • <strong>Help</strong> — Give ally advantage on their next roll
+                    </div>
+                </div>
+                
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #f59e0b; font-weight: 600; margin-bottom: 0.35rem;">BONUS ACTION (pick one)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        • <strong>Hexblade's Curse</strong> — +5 damage, crit on 19-20, heal on kill (1/short rest)<br>
+                        • <strong>Cunning Action: Dash</strong> — Extra 30 ft movement<br>
+                        • <strong>Cunning Action: Disengage</strong> — Move without opportunity attacks<br>
+                        • <strong>Cunning Action: Hide</strong> — Stealth check to become hidden<br>
+                        • <strong>Hex spell</strong> — +1d6 damage per hit, costs spell slot<br>
+                        • <strong>Misty Step</strong> — Teleport 30 ft, costs spell slot
+                    </div>
+                </div>
+                
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #f43f5e; font-weight: 600; margin-bottom: 0.35rem;">FREE STUFF (every turn)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        • <strong>Move 30 ft</strong> — Split it up however you want<br>
+                        • <strong>Fancy Footwork</strong> — After attacking someone, walk away without triggering opportunity attack from them<br>
+                        • <strong>Draw/sheathe weapon</strong> — One free item interaction<br>
+                        • <strong>Talk</strong> — Say a few words, intimidate, etc.
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #ef4444;">
+            <div class="card-title"><span class="icon">🛡️</span> I'm Being Attacked!</div>
+            <div style="font-size: 0.85rem;">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #ef4444; font-weight: 600; margin-bottom: 0.35rem;">REACTIONS (use one per round)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        • <strong>Uncanny Dodge</strong> — Halve damage from ONE attack you can see<br>
+                        • <strong>Shield (from Ring)</strong> — +5 AC until your next turn, might make attack miss<br>
+                        • <strong>Absorb Elements (from Ring)</strong> — Halve elemental damage, add it to your next attack<br>
+                        • <strong>Counterspell</strong> — Stop an enemy's spell completely<br>
+                        • <strong>Opportunity Attack</strong> — Enemy leaves your reach? Free Booming Blade attack
+                    </div>
+                </div>
+                
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #22c55e; font-weight: 600; margin-bottom: 0.35rem;">PASSIVE DEFENSES (always on)</div>
+                    <div style="color: var(--text-muted); font-size: 0.8rem;">
+                        • <strong>AC 17</strong> — They need to roll 17+ to hit you<br>
+                        • <strong>Evasion</strong> — Fireball/Lightning Bolt? Pass DEX save = 0 damage, fail = half<br>
+                        • <strong>Fire Resistance</strong> — All fire damage is halved automatically<br>
+                        • <strong>HP 131</strong> — You can take a beating
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #8b5cf6;">
+            <div class="card-title"><span class="icon">🧙</span> A Wizard is Casting a Spell!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #8b5cf6; font-weight: 600; margin-bottom: 0.35rem;">COUNTERSPELL (Reaction)</div>
+                    <div>
+                        • When you SEE someone casting within 60 ft, you can use your reaction<br>
+                        • If their spell is 3rd level or lower → <strong>automatically stopped</strong><br>
+                        • If higher → roll d20 + 5, need to beat 10 + spell level<br>
+                        • You have <strong>3 Counterspells</strong> available (2 slots + 1 in Ring)
+                    </div>
+                </div>
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #8b5cf6; font-weight: 600; margin-bottom: 0.35rem;">IF YOU CAN'T COUNTERSPELL</div>
+                    <div>
+                        • <strong>Evasion</strong> saves you from Fireball, Lightning Bolt (DEX save spells)<br>
+                        • <strong>Absorb Elements</strong> halves elemental damage<br>
+                        • <strong>Fire Resistance</strong> auto-halves fire spells<br>
+                        • If all else fails: <strong>Uncanny Dodge</strong> halves spell attack damage
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #6366f1;">
+            <div class="card-title"><span class="icon">🕵️</span> I'm Sneaking / Infiltrating!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #6366f1; font-weight: 600; margin-bottom: 0.35rem;">YOUR INFILTRATION KIT</div>
+                    <div>
+                        • <strong>Stealth +14</strong> — Roll when moving quietly past enemies<br>
+                        • <strong>Thieves' Tools +14</strong> — Pick locks, disarm traps<br>
+                        • <strong>Mask of Many Faces</strong> — Disguise as anyone, unlimited uses, no cost<br>
+                        • <strong>Devil's Sight</strong> — See 120 ft in total darkness<br>
+                        • <strong>Darkness spell</strong> — Create darkness you can see through, others can't
+                    </div>
+                </div>
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #6366f1; font-weight: 600; margin-bottom: 0.35rem;">COMMON SITUATIONS</div>
+                    <div>
+                        • <strong>Guard patrol:</strong> Disguise as servant (Mask of Many Faces) or hide (Stealth +14)<br>
+                        • <strong>Locked door:</strong> Thieves' Tools +14<br>
+                        • <strong>Dark room:</strong> Devil's Sight — you see perfectly<br>
+                        • <strong>Need to disappear:</strong> Cast Darkness, walk away<br>
+                        • <strong>Spotted:</strong> Panache to charm, or Misty Step to escape
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #f59e0b;">
+            <div class="card-title"><span class="icon">💬</span> I'm Talking to Someone!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #f59e0b; font-weight: 600; margin-bottom: 0.35rem;">YOUR SOCIAL SKILLS</div>
+                    <div>
+                        • <strong>Persuasion +15</strong> — Convince them to help you, believe you, like you<br>
+                        • <strong>Deception +15</strong> — Lie convincingly, bluff, mislead<br>
+                        • <strong>Performance +10</strong> — Entertain, distract, put on a show<br>
+                        • <strong>Insight +7</strong> — Read their motives, detect lies<br>
+                        • <strong>Intimidation +5</strong> — Threaten (not your strongest)
+                    </div>
+                </div>
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #f59e0b; font-weight: 600; margin-bottom: 0.35rem;">SPECIAL ABILITIES</div>
+                    <div>
+                        • <strong>Panache (non-hostile):</strong> Charm someone for 1 minute — they see you as a friendly acquaintance. Persuasion vs their Insight.<br>
+                        • <strong>Mask of Many Faces:</strong> Look like someone they trust or expect
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #22d3ee;">
+            <div class="card-title"><span class="icon">💊</span> I Need to Heal!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem; margin-bottom: 0.5rem;">
+                    <div style="color: #22d3ee; font-weight: 600; margin-bottom: 0.35rem;">YOUR OPTIONS</div>
+                    <div>
+                        • <strong>Short Rest (1 hour):</strong> Spend Hit Dice — roll d8+4 per die to heal. You have 15 dice.<br>
+                        • <strong>Hexblade's Curse:</strong> If cursed target dies, heal 10 HP instantly<br>
+                        • <strong>Armor of Agathys:</strong> Cast for 15 temp HP (not real healing, but a buffer)<br>
+                        • <strong>Healing Potions:</strong> If you have any, action to drink<br>
+                        • <strong>Ask the party:</strong> Healers, bards, paladins can heal you
+                    </div>
+                </div>
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #22d3ee; font-weight: 600; margin-bottom: 0.35rem;">PREVENTING DAMAGE</div>
+                    <div>
+                        • <strong>Uncanny Dodge:</strong> Halve one attack's damage<br>
+                        • <strong>Shield (+5 AC):</strong> Might make attack miss entirely<br>
+                        • <strong>Armor of Agathys:</strong> 15 temp HP absorbs hits first
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: #ec4899;">
+            <div class="card-title"><span class="icon">💀</span> I'm at 0 HP!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: #ec4899; font-weight: 600; margin-bottom: 0.35rem;">DEATH SAVES</div>
+                    <div>
+                        • You're <strong>unconscious</strong> and fall prone<br>
+                        • Each turn, roll d20 (no modifiers):<br>
+                        &nbsp;&nbsp;— <strong>10+</strong> = success<br>
+                        &nbsp;&nbsp;— <strong>9 or below</strong> = failure<br>
+                        &nbsp;&nbsp;— <strong>Natural 20</strong> = wake up with 1 HP!<br>
+                        &nbsp;&nbsp;— <strong>Natural 1</strong> = 2 failures<br>
+                        • <strong>3 successes</strong> = stabilize (stop rolling, still at 0)<br>
+                        • <strong>3 failures</strong> = dead<br>
+                        • <strong>Any healing</strong> = wake up immediately<br>
+                        • <strong>Taking damage while down</strong> = automatic failure (crit = 2 failures)
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card" style="border-left-color: var(--primary);">
+            <div class="card-title"><span class="icon">💥</span> I Want Maximum Damage!</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">
+                <div style="background: var(--secondary); padding: 0.75rem; border-radius: 0.5rem;">
+                    <div style="color: var(--primary-light); font-weight: 600; margin-bottom: 0.35rem;">THE NOVA COMBO (~90 damage)</div>
+                    <div>
+                        <strong>Setup:</strong><br>
+                        1. Make sure you have Sneak Attack conditions (ally nearby, advantage, or 1v1)<br>
+                        2. <strong>Bonus Action:</strong> Hexblade's Curse on target (crit on 19-20)<br><br>
+                        <strong>The Attack:</strong><br>
+                        3. <strong>Action:</strong> Booming Blade attack<br>
+                        4. Roll to hit — hoping for 19 or 20 (critical!)<br>
+                        5. On crit, declare: <strong>"I use Eldritch Smite"</strong><br><br>
+                        <strong>Damage (all dice doubled):</strong><br>
+                        • Rapier: 2d8<br>
+                        • Booming Blade: 4d8<br>
+                        • Sneak Attack: 10d6<br>
+                        • Eldritch Smite: 8d8<br>
+                        • Flat bonuses: +10<br>
+                        • Target is knocked <strong>prone</strong><br><br>
+                        <strong>Total: ~90 damage in one hit</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Combat Tab -->
-    <div class="tab-content active" id="combat">
+    <div class="tab-content" id="combat">
         <!-- Spell Slots Tracker -->
         <div class="card" style="background: linear-gradient(135deg, var(--card) 0%, #1a1a3a 100%); border: 1px solid #6366f1;">
             <div class="card-header">
